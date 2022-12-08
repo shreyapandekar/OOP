@@ -1,4 +1,4 @@
-#include <iostream>
+#include<iostream>
 #include<string.h>
 using namespace std;
 
@@ -16,66 +16,124 @@ class students{
     public:
     students()
     {
-        name=" ";
+        name="";
         roll_no=0;
         cls="";
         division=new char;
-        dob="dd/m/yyyy";
+        dob="dd/mm/yyyy";
         bloodgroup=new char[4];
+
     }
     ~students(){
         delete division;
         delete[] bloodgroup;
-    }
 
-    static int getcount()
-    {
+    }
+    static int getcount(){
         return count;
     }
-    void getData(studData*);
-    void dispData(studData*);
-
+    void getdata(studData*);
+    void dispdata(studData*);
 };
+
 class studData{
     string address;
     long int* tellno;
     long int* dlno;
-    friend class students;
+
     public:
     studData()
     {
         address="";
         tellno=new long;
         dlno=new long;
+
     }
     ~studData()
     {
         delete tellno;
         delete dlno;
+
     }
     void getstudData(){
-        cout<<"enter contact address";
+        cout<<"Enter contact no";
         cin.get();
         getline(cin,address);
-        cout<<"Enter telephonr no";
+        cout<<"Enter tell no";
         cin>>*tellno;
-        cout<<"Enter driving license";
+        cout<<"driving License";
         cin>>*dlno;
     }
     void dispstudData()
     {
         cout<<"Contact Address"<<address<<endl;
-        cout<<"Telephne number"<<*tellno<<endl;
-        cout<<"Driving licence"<<*dlno<<endl;
+        cout<<"Telephone number"<<*tellno<<endl;
+        cout<<"Driving License"<<*dlno<<endl;
     }
 
 };
 
-inline void students::getData(studData* st){
-    cout<<"Enter student Name";;
+inline void students::getdata(studData* st){
+    cout<<"Enter students Name";
     getline(cin,name);
-    cout<<"Enter roll no";
+    cout<<"Enter students rollno";
     cin>>roll_no;
-    
+    cout<<"Enter students class";
+    cin.get();
+    getline(cin,cls);
+    cout<<"Enter students division";
+    cin>>division;
+    cout<<"Enter Dob";
+    cin.get();
+    getline(cin,dob);
+    cout<<"Enter bloodgroup";
+    cin>>bloodgroup;
+    st->getstudData();
+    count++;
+}
+
+inline void students::dispdata(studData* st1){
+    cout<<"Name"<<name<<endl;
+    cout<<"rollno"<<roll_no<<endl;
+    cout<<"class"<<cls;
+    cout<<"division"<<division<<endl;
+    cout<<"DOB"<<dob<<endl;
+    cout<<"Bloodgroup"<<bloodgroup<<endl;
+    st1->dispstudData();
+}
+int students::count;
+int main(){
+    Student* stud1[100];
+    StudData* stud2[100];
+    int n=0;
+    char ch;
+
+    do
+    {
+        stud1[n]=new Student;
+        stud2[n]=new StudData;
+        stud1[n]->getData(stud2[n]);
+        n++;
+        cout<<"Do you want to add another student (y/n) : ";
+        cin>>ch;
+        cin.get();
+    } while (ch=='y' || ch=='Y');
+
+    for(int i=0;i<n;i++)
+    {
+        cout<<"---------------------------------------------------------------"<<endl;
+        stud1[i]->dispData(stud2[i]);
+    }
+
+    cout<<"---------------------------------------------------------------"<<endl;
+    cout<<"Total Students : "<<Student::getCount();
+    cout<<endl<<"---------------------------------------------------------------"<<endl;
+
+    for(int i=0;i<n;i++)
+    {
+        delete stud1[i];
+        delete stud2[i];
+    }
+    return 0;
 
 }
