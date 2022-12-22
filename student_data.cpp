@@ -56,63 +56,63 @@ class studData{
 
     }
     void getstudData(){
-        cout<<"Enter contact no";
+        cout<<"Enter contact no: ";
         cin.get();
         getline(cin,address);
-        cout<<"Enter tell no";
+        cout<<"Enter tell no: ";
         cin>>*tellno;
-        cout<<"driving License";
+        cout<<"driving License: ";
         cin>>*dlno;
     }
     void dispstudData()
     {
-        cout<<"Contact Address"<<address<<endl;
-        cout<<"Telephone number"<<*tellno<<endl;
-        cout<<"Driving License"<<*dlno<<endl;
+        cout<<"Contact Address: "<<address<<endl;
+        cout<<"Telephone number: "<<*tellno<<endl;
+        cout<<"Driving License: "<<*dlno<<endl;
     }
 
 };
 
 inline void students::getdata(studData* st){
-    cout<<"Enter students Name";
+    cout<<"Enter students Name: ";
     getline(cin,name);
-    cout<<"Enter students rollno";
+    cout<<"Enter students rollno: ";
     cin>>roll_no;
-    cout<<"Enter students class";
+    cout<<"Enter students class: ";
     cin.get();
     getline(cin,cls);
-    cout<<"Enter students division";
+    cout<<"Enter students division: ";
     cin>>division;
-    cout<<"Enter Dob";
+    cout<<"Enter Dob": ;
     cin.get();
     getline(cin,dob);
-    cout<<"Enter bloodgroup";
+    cout<<"Enter bloodgroup: ";
     cin>>bloodgroup;
     st->getstudData();
     count++;
 }
 
 inline void students::dispdata(studData* st1){
-    cout<<"Name"<<name<<endl;
-    cout<<"rollno"<<roll_no<<endl;
-    cout<<"class"<<cls;
-    cout<<"division"<<division<<endl;
-    cout<<"DOB"<<dob<<endl;
-    cout<<"Bloodgroup"<<bloodgroup<<endl;
+    cout<<"Name: "<<name<<endl;
+    cout<<"rollno: "<<roll_no<<endl;
+    cout<<"class: "<<cls;
+    cout<<"division: "<<division<<endl;
+    cout<<"DOB: "<<dob<<endl;
+    cout<<"Bloodgroup: "<<bloodgroup<<endl;
     st1->dispstudData();
 }
 int students::count;
 int main(){
-    Student* stud1[100];
-    StudData* stud2[100];
+    students* stud1[100];
+    studData* stud2[100];
     int n=0;
     char ch;
 
     do
     {
-        stud1[n]=new Student;
-        stud2[n]=new StudData;
-        stud1[n]->getData(stud2[n]);
+        stud1[n]=new students;
+        stud2[n]=new studData;
+        stud1[n]->getdata(stud2[n]);
         n++;
         cout<<"Do you want to add another student (y/n) : ";
         cin>>ch;
@@ -122,11 +122,11 @@ int main(){
     for(int i=0;i<n;i++)
     {
         cout<<"---------------------------------------------------------------"<<endl;
-        stud1[i]->dispData(stud2[i]);
+        stud1[i]->dispdata(stud2[i]);
     }
 
     cout<<"---------------------------------------------------------------"<<endl;
-    cout<<"Total Students : "<<Student::getCount();
+    cout<<"Total Students : "<<students::getcount();
     cout<<endl<<"---------------------------------------------------------------"<<endl;
 
     for(int i=0;i<n;i++)
